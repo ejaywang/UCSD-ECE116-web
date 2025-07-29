@@ -1,0 +1,67 @@
+<h1>Assignment 1: TensorFlow Lite Micro Model Information</h1>
+<p>This document provides information about the pre-trained TensorFlow Lite Micro model used in Assignment 1.</p>
+<h2>Model Overview</h2>
+<p>The model provided for Assignment 1 is a simple binary classification model designed to demonstrate the basics of TensorFlow Lite Micro integration on the ESP32-S3.</p>
+<h3>Model Specifications</h3>
+<ul>
+<li><strong>Input</strong>: Single floating-point value (normalized between 0.0 and 1.0)</li>
+<li><strong>Output</strong>: Single floating-point value (binary classification result, typically 0.0 or 1.0)</li>
+<li><strong>Model Type</strong>: Fully connected neural network (simple feedforward)</li>
+<li><strong>Quantization</strong>: 32-bit floating-point (for simplicity in first assignment)</li>
+<li><strong>Model Size</strong>: Approximately 1-2 KB</li>
+<li><strong>Memory Requirements</strong>: ~2KB tensor arena should be sufficient</li>
+</ul>
+<h3>Model Behavior</h3>
+<p>The model is trained to perform a simple threshold-based classification on analog sensor input:
+- <strong>Input &lt; 0.5</strong>: Output ≈ 0.0 (classified as "dark" or "low")
+- <strong>Input ≥ 0.5</strong>: Output ≈ 1.0 (classified as "bright" or "high")</p>
+<p>This simple behavior allows students to easily verify that their implementation is working correctly by covering and uncovering the photoresistor.</p>
+<h3>Model Source</h3>
+<p>For Assignment 1, we can use a simple model based on the TensorFlow Lite Micro "Hello World" example, which demonstrates a sine wave approximation. However, for our purposes, we'll create a simpler binary classification model.</p>
+<h2>Alternative: Using TensorFlow Lite Micro Hello World Model</h2>
+<p>If creating a custom model proves complex, students can use the existing TensorFlow Lite Micro "Hello World" sine wave model as follows:</p>
+<ol>
+<li><strong>Download the model</strong>: The sine wave model is available in the TensorFlow Lite Micro examples</li>
+<li><strong>Adapt the input</strong>: Instead of using time-based input, use the normalized photoresistor value</li>
+<li><strong>Interpret the output</strong>: Treat the sine wave output as a continuous value and apply a threshold for binary classification</li>
+</ol>
+<h3>Using the Sine Wave Model</h3>
+<p>```cpp
+// In your ESP32-S3 code, after getting the analog value:
+float normalizedValue = analogValue / 4095.0;  // Normalize to 0.0-1.0</p>
+<p>// Use normalized value as input to the sine wave model
+// The model expects a value that represents "time" in the sine wave
+input-&gt;data.f[0] = normalizedValue * 2 * PI;  // Scale to 0-2π range</p>
+<p>// After inference, interpret the sine wave output
+float sine_output = output-&gt;data.f[0];
+int binary_result = (sine_output &gt; 0.0) ? 1 : 0;  // Threshold at 0
+```</p>
+<h2>Model Integration Steps</h2>
+<ol>
+<li><strong>Include the model header</strong>: <code>#include "model.h"</code> (or the appropriate model file)</li>
+<li><strong>Load the model</strong>: <code>model = tflite::GetModel(g_model);</code></li>
+<li><strong>Set up the interpreter</strong>: Create resolver, interpreter, and allocate tensors</li>
+<li><strong>Get tensor pointers</strong>: <code>input = interpreter-&gt;input(0);</code> and <code>output = interpreter-&gt;output(0);</code></li>
+<li><strong>Perform inference</strong>: Set input value, call <code>interpreter-&gt;Invoke()</code>, read output</li>
+</ol>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<ol>
+<li><strong>Compilation errors</strong>: Ensure TensorFlow Lite Micro library is properly included in <code>platformio.ini</code></li>
+<li><strong>Memory allocation failures</strong>: Increase <code>kTensorArenaSize</code> if needed</li>
+<li><strong>Unexpected output values</strong>: Check input normalization and output interpretation</li>
+</ol>
+<h3>Debugging Tips</h3>
+<ol>
+<li><strong>Print tensor shapes</strong>: Verify input/output tensor dimensions match expectations</li>
+<li><strong>Test with known values</strong>: Use fixed input values to verify model behavior</li>
+<li><strong>Monitor memory usage</strong>: Check available heap memory before and after model initialization</li>
+</ol>
+<h2>Model File Location</h2>
+<p>The model file (<code>model.h</code> or similar) will be provided on the course website and should be placed in the <code>src/</code> directory of your PlatformIO project.</p>
+<h2>Future Assignments</h2>
+<p>In later assignments, students will work with more complex models including:
+- Quantized models (8-bit integer)
+- Convolutional neural networks for image processing
+- Recurrent networks for audio processing</p>
+<p>This first assignment focuses on the fundamental workflow rather than model complexity.</p>

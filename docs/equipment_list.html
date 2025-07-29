@@ -1,0 +1,53 @@
+<h1>ECE 4xx: Embedded Artificial Intelligence - Required Equipment List</h1>
+<p>This document outlines the required hardware and software equipment for students enrolled in the Embedded Artificial Intelligence course. To ensure a consistent and focused learning experience, all assignments will be designed around a single, versatile hardware platform: the <strong>ESP32-S3 with Camera Module</strong>. This choice provides the necessary capabilities for all course assignments, from basic microcontroller interactions to advanced edge AI applications involving vision, audio, and cloud integration.</p>
+<h2>Hardware Components</h2>
+<h3>1. ESP32-S3 with Camera Module</h3>
+<ul>
+<li><strong>Recommended Board: Espressif ESP32-S3-EYE.</strong> This board is specifically recommended for its integrated 2MP camera, 8MB PSRAM, 8MB Flash, and onboard microphone, which directly support all course assignments. It offers an excellent all-in-one solution for embedded AI development.<ul>
+<li><strong>Justification:</strong> The ESP32-S3 is a powerful, cost-effective microcontroller with built-in Wi-Fi and Bluetooth, making it ideal for networked embedded AI applications. Its camera interface is crucial for computer vision assignments, and its I2S peripheral supports audio processing. The availability of numerous GPIO pins allows for flexible integration with various external sensors. This single platform can support all five assignments:<ul>
+<li><strong>Assignment 1 (Fundamentals):</strong> Basic microcontroller programming, sensor data acquisition, and TensorFlow Lite Micro deployment.</li>
+<li><strong>Assignment 2 (Embedded Vision):</strong> Direct camera integration for image classification and model optimization.</li>
+<li><strong>Assignment 3 (Audio Processing):</strong> Microphone integration via I2S for keyword spotting.</li>
+<li><strong>Assignment 4 (Sensor Fusion):</strong> Ample GPIOs for connecting multiple external sensors (IMU, temperature/humidity).</li>
+<li><strong>Assignment 5 (Edge-Cloud Hybrid):</strong> Built-in Wi-Fi for seamless cloud communication.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2. Essential Peripherals and Accessories</h3>
+<ul>
+<li><strong>Microphone Module (e.g., I2S MEMS Microphone like INMP441):</strong> While some ESP32-S3 boards might have an onboard microphone, an external I2S microphone module is recommended for better audio quality and dedicated audio processing assignments.</li>
+<li><strong>IMU Sensor (Inertial Measurement Unit, e.g., MPU-6050 or similar):</strong> For motion-based applications and anomaly detection in Assignment 4.</li>
+<li><strong>Temperature/Humidity Sensor (e.g., DHT11/DHT22 or BME280):</strong> For environmental data collection in Assignment 4.</li>
+<li><strong>Breadboard:</strong> For prototyping and easily connecting components.</li>
+<li><strong>Jumper Wires (Male-to-Male, Male-to-Female):</strong> For making connections on the breadboard and to the ESP32-S3 board.</li>
+<li><strong>Micro-USB to USB-A Cable:</strong> For programming and powering the ESP32-S3 board.</li>
+<li><strong>Small LEDs and Resistors:</strong> For basic output indicators and circuit building.</li>
+</ul>
+<h2>Software Requirements</h2>
+<h3>1. Integrated Development Environments (IDEs) &amp; Compilers</h3>
+<ul>
+<li><strong>PlatformIO (VS Code Extension):</strong> Recommended for programming the ESP32-S3, offering a more robust and feature-rich environment than the Arduino IDE for complex projects.</li>
+<li><strong>Python 3.x:</strong> The primary programming language for machine learning development, data analysis, and host-side scripting.</li>
+</ul>
+<h3>2. Machine Learning Frameworks &amp; Libraries</h3>
+<ul>
+<li><strong>TensorFlow / Keras:</strong> For training and developing machine learning models on your computer.</li>
+<li><strong>TensorFlow Lite / TensorFlow Lite Micro:</strong> Essential for converting and deploying models to the ESP32-S3.</li>
+<li><strong>Python Libraries:</strong><ul>
+<li><strong>NumPy, Pandas:</strong> For data manipulation and analysis.</li>
+<li><strong>Matplotlib, Seaborn:</strong> For data visualization.</li>
+<li><strong>Scikit-learn:</strong> For traditional machine learning algorithms.</li>
+<li><strong>OpenCV (Python):</strong> For image processing tasks on the host computer (e.g., preparing datasets).</li>
+<li><strong>Pyserial:</strong> For serial communication with the ESP32-S3.</li>
+<li><strong>Requests (for Assignment 5):</strong> For making HTTP requests to cloud services.</li>
+</ul>
+</li>
+</ul>
+<h3>3. Cloud Platform Account (Recommended for Assignment 5)</h3>
+<ul>
+<li><strong>Google Cloud Platform (GCP), Amazon Web Services (AWS), or Microsoft Azure:</strong> Access to a cloud platform will be beneficial for Assignment 5, allowing students to experiment with cloud-based services for the edge-cloud hybrid system. Many platforms offer free tiers for basic usage.</li>
+</ul>
+<h2>Summary</h2>
+<p>By standardizing on the ESP32-S3 with camera module, students will gain in-depth experience with a powerful and widely used embedded platform in the AI and IoT space. This focused approach ensures that all practical assignments build upon a common hardware foundation, streamlining the learning process and allowing for deeper exploration of embedded AI concepts. Students are expected to acquire these components before the start of the course.</p>

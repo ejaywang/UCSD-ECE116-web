@@ -1,0 +1,124 @@
+<h1>ECE 4xx: Embedded Artificial Intelligence - Assignment 1 Instructor Guide</h1>
+<p>This document provides a detailed grading rubric and an automation strategy for Assignment 1: "Fundamentals of On-Device Inference."</p>
+<h2>1. Grading Rubric</h2>
+<p><strong>Total Points:</strong> 100</p>
+<p>| Category | Task | Points | Grading Method |
+|---|---|---|---|
+| <strong>ESP32-S3 Firmware</strong> | <strong>Task 1: Environment Setup</strong> | 15 | Automated |
+| | <strong>Task 2: Sensor Data Acquisition</strong> | 20 | Automated |
+| | <strong>Task 3: Model Integration &amp; Inference</strong> | 30 | Automated |
+| <strong>Host-Side Script</strong> | <strong>Task 4: Data Visualization</strong> | 25 | Automated &amp; Manual |
+| <strong>Documentation</strong> | <strong>Task 5: Report &amp; Video</strong> | 10 | Manual |</p>
+<h3>Detailed Breakdown:</h3>
+<h4>ESP32-S3 Firmware (65 points)</h4>
+<ul>
+<li>
+<p><strong>Task 1: Environment Setup (15 points)</strong></p>
+<ul>
+<li>[5 pts] PlatformIO project compiles without errors.</li>
+<li>[10 pts] Basic sketch uploads and runs on the ESP32-S3 (verified by serial output).</li>
+</ul>
+</li>
+<li>
+<p><strong>Task 2: Sensor Data Acquisition (20 points)</strong></p>
+<ul>
+<li>[10 pts] Correctly reads analog sensor data.</li>
+<li>[10 pts] Prints raw sensor data to serial monitor in the specified format.</li>
+</ul>
+</li>
+<li>
+<p><strong>Task 3: Model Integration &amp; Inference (30 points)</strong></p>
+<ul>
+<li>[10 pts] TensorFlow Lite Micro model is correctly integrated.</li>
+<li>[10 pts] Inference is performed on sensor data.</li>
+<li>[10 pts] Both sensor data and inference result are printed to serial in the correct format.</li>
+</ul>
+</li>
+</ul>
+<h4>Host-Side Script (25 points)</h4>
+<ul>
+<li><strong>Task 4: Data Visualization</strong><ul>
+<li>[10 pts] Python script runs without errors.</li>
+<li>[10 pts] Correctly parses serial data.</li>
+<li>[5 pts] Real-time plot updates dynamically (manual check of video).</li>
+</ul>
+</li>
+</ul>
+<h4>Documentation (10 points)</h4>
+<ul>
+<li><strong>Task 5: Report &amp; Video</strong><ul>
+<li>[5 pts] Report is clear, complete, and technically accurate.</li>
+<li>[5 pts] Video demonstration clearly shows the working system.</li>
+</ul>
+</li>
+</ul>
+<h2>2. Automation Strategy</h2>
+<h3>Automated Grading Workflow:</h3>
+<ol>
+<li>
+<p><strong>CI/CD Pipeline (GitHub Actions / GitLab CI):</strong></p>
+<ul>
+<li><strong>Trigger:</strong> On student submission (e.g., push to a specific branch).</li>
+<li><strong>Steps:</strong><ol>
+<li><strong>Checkout Code:</strong> Clones the student's repository.</li>
+<li><strong>Compile Firmware:</strong> Uses PlatformIO CLI to compile the ESP32-S3 firmware.</li>
+<li><strong>Run Unit Tests (Optional but Recommended):</strong> If unit tests are provided for the firmware, run them.</li>
+<li><strong>Run Python Script:</strong> Execute the host-side Python script with a simulated serial port to check for errors and correct data parsing.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom Python Grading Script:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> To perform more detailed checks on the serial output and functionality.</li>
+<li><strong>Features:</strong><ul>
+<li><strong>Serial Port Mocking:</strong> Use a library like <code>pyserial-sim</code> to simulate the ESP32-S3's serial output without needing physical hardware.</li>
+<li><strong>Data Format Validation:</strong> Check if the serial output adheres to the specified format (e.g., <code>Analog: XXX, Inference: Y</code>).</li>
+<li><strong>Inference Verification:</strong> For a given set of simulated sensor inputs, verify that the inference output from the ESP32-S3 matches the expected output within a tolerance.</li>
+<li><strong>Report Generation:</strong> The script can generate a report of the automated checks, which can be used by the instructor for final grading.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3>Manual Grading Workflow:</h3>
+<ol>
+<li>
+<p><strong>Code Review:</strong></p>
+<ul>
+<li>Review the ESP32-S3 firmware and Python script for code quality, comments, and logic.</li>
+<li>Check for plagiarism.</li>
+</ul>
+</li>
+<li>
+<p><strong>Report and Video Review:</strong></p>
+<ul>
+<li>Read the student's report for clarity, completeness, and technical accuracy.</li>
+<li>Watch the video demonstration to visually confirm the working system.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Grade Calculation:</strong></p>
+<ul>
+<li>Combine the automated grading results with the manual review to determine the final grade.</li>
+</ul>
+</li>
+</ol>
+<h2>3. Instructor Notes</h2>
+<ul>
+<li><strong>Provide a Clear Model:</strong> The pre-trained TensorFlow Lite Micro model (<code>model.h</code>) should be simple and well-documented. Provide a clear explanation of its input and output format.</li>
+<li><strong>Serial Output Format:</strong> Emphasize the importance of adhering to the specified serial output format, as this is crucial for automated grading.</li>
+<li><strong>Common Issues to Watch For:</strong><ul>
+<li>Incorrect PlatformIO project setup.</li>
+<li>Incorrect wiring of the photoresistor circuit.</li>
+<li>Issues with serial port permissions on the host PC.</li>
+<li>Incorrect parsing of serial data in the Python script.</li>
+<li>Blocking code in the main loop that prevents real-time updates.</li>
+</ul>
+</li>
+</ul>
+<p>By combining automated checks with manual review, this grading strategy provides a balance between efficiency and thoroughness, allowing for consistent and fair evaluation of student work while minimizing the instructor's grading workload.</p>
+<h2>Automated Grading</h2>
+<p>For detailed instructions on setting up and using the automated grading script, please refer to the dedicated document: <code>assignment_1_autograde/instructor_grading_guide.md</code>.</p>
+<p>This script will assist in verifying code compilation and basic Python script execution, streamlining the initial assessment process.</p>

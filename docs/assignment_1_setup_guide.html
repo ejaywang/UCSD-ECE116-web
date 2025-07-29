@@ -1,0 +1,144 @@
+<h1>Assignment 1: ESP32-S3 Setup Guide</h1>
+<p>This guide will help you set up your development environment for Assignment 1 of the Embedded AI course. Follow these steps carefully to ensure your ESP32-S3-EYE board is properly configured for TensorFlow Lite Micro development.</p>
+<h2>Prerequisites</h2>
+<p>Before starting, ensure you have:
+- ESP32-S3-EYE Development Board
+- Micro-USB to USB-A cable
+- Computer with Windows, macOS, or Linux
+- Stable internet connection for downloading software</p>
+<h2>Step 1: Install Visual Studio Code</h2>
+<ol>
+<li>Download and install Visual Studio Code from <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li>Launch VS Code after installation</li>
+</ol>
+<h2>Step 2: Install PlatformIO IDE Extension</h2>
+<ol>
+<li>In VS Code, click on the Extensions icon in the left sidebar (or press <code>Ctrl+Shift+X</code>)</li>
+<li>Search for "PlatformIO IDE"</li>
+<li>Click "Install" on the official PlatformIO IDE extension by PlatformIO</li>
+<li>Wait for the installation to complete (this may take several minutes)</li>
+<li>Restart VS Code when prompted</li>
+</ol>
+<h2>Step 3: Verify PlatformIO Installation</h2>
+<ol>
+<li>After restarting VS Code, you should see a PlatformIO icon in the left sidebar</li>
+<li>Click on the PlatformIO icon</li>
+<li>You should see the PlatformIO Home page open</li>
+</ol>
+<h2>Step 4: Create Your First ESP32-S3 Project</h2>
+<ol>
+<li>In PlatformIO Home, click "New Project"</li>
+<li>Fill in the project details:</li>
+<li><strong>Name</strong>: <code>esp32_test</code></li>
+<li><strong>Board</strong>: Search for and select "ESP32-S3-DevKitC-1" (this is compatible with ESP32-S3-EYE)</li>
+<li><strong>Framework</strong>: Select "Arduino"</li>
+<li><strong>Location</strong>: Use default or choose your preferred location</li>
+<li>Click "Finish"</li>
+<li>Wait for the project to be created and dependencies to be downloaded</li>
+</ol>
+<h2>Step 5: Connect Your ESP32-S3-EYE Board</h2>
+<ol>
+<li>Connect your ESP32-S3-EYE to your computer using the micro-USB cable</li>
+<li>The board should power on (you may see LEDs light up)</li>
+</ol>
+<h3>Finding the Correct Serial Port</h3>
+<p><strong>Windows:</strong>
+- Open Device Manager
+- Look under "Ports (COM &amp; LPT)" for a device like "Silicon Labs CP210x USB to UART Bridge" or similar
+- Note the COM port number (e.g., COM3, COM4)</p>
+<p><strong>macOS:</strong>
+- Open Terminal
+- Run: <code>ls /dev/cu.*</code>
+- Look for a device like <code>/dev/cu.usbserial-*</code> or <code>/dev/cu.SLAB_USBtoUART</code></p>
+<p><strong>Linux:</strong>
+- Open Terminal
+- Run: <code>ls /dev/ttyUSB*</code> or <code>dmesg | grep tty</code>
+- Look for a device like <code>/dev/ttyUSB0</code></p>
+<h2>Step 6: Test Basic Connectivity</h2>
+<ol>
+<li>In your <code>esp32_test</code> project, open <code>src/main.cpp</code></li>
+<li>Replace the contents with this simple test code:</li>
+</ol>
+<p>```cpp</p>
+<h1>include <Arduino.h></h1>
+<p>void setup() {
+  Serial.begin(115200);
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.println("ESP32-S3 Test - Hello World!");
+}</p>
+<p>void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  Serial.println("LED ON");
+  delay(1000);</p>
+<p>digitalWrite(LED_BUILTIN, LOW);
+  Serial.println("LED OFF");
+  delay(1000);
+}
+```</p>
+<ol>
+<li>Save the file (<code>Ctrl+S</code>)</li>
+</ol>
+<h2>Step 7: Upload and Test</h2>
+<ol>
+<li>In the PlatformIO toolbar at the bottom of VS Code, click the "Upload" button (arrow pointing right)</li>
+<li>Wait for the code to compile and upload</li>
+<li>If successful, you should see "SUCCESS" in the terminal</li>
+</ol>
+<h3>Troubleshooting Upload Issues</h3>
+<p>If upload fails:
+1. <strong>Check the cable</strong>: Ensure you're using a data cable, not just a charging cable
+2. <strong>Try holding BOOT button</strong>: Hold the BOOT button on the ESP32-S3-EYE while clicking upload, release after upload starts
+3. <strong>Check port selection</strong>: In <code>platformio.ini</code>, add the line <code>upload_port = YOUR_PORT</code> (replace with your actual port)
+4. <strong>Driver issues</strong>: You may need to install CP210x drivers from Silicon Labs</p>
+<h2>Step 8: Monitor Serial Output</h2>
+<ol>
+<li>Click the "Serial Monitor" button in the PlatformIO toolbar (plug icon)</li>
+<li>Set the baud rate to 115200</li>
+<li>You should see "ESP32-S3 Test - Hello World!" followed by alternating "LED ON" and "LED OFF" messages</li>
+<li>The onboard LED should blink every second</li>
+</ol>
+<h2>Step 9: Install Python Dependencies</h2>
+<p>Open a terminal/command prompt and install the required Python libraries:</p>
+<p><code>bash
+pip install pyserial matplotlib numpy</code></p>
+<h2>Verification Checklist</h2>
+<p>Before proceeding to Assignment 1, ensure:
+- [ ] VS Code and PlatformIO are installed and working
+- [ ] You can create a new ESP32-S3 project
+- [ ] Your ESP32-S3-EYE board is recognized by your computer
+- [ ] You can successfully upload code to the board
+- [ ] You can see serial output in the Serial Monitor
+- [ ] The onboard LED blinks as expected
+- [ ] Python dependencies are installed</p>
+<h2>Common Issues and Solutions</h2>
+<h3>Issue: "Device not found" or upload fails</h3>
+<p><strong>Solution</strong>: 
+- Check USB cable (must be data cable)
+- Hold BOOT button during upload
+- Install CP210x drivers
+- Try a different USB port</p>
+<h3>Issue: PlatformIO not appearing in VS Code</h3>
+<p><strong>Solution</strong>:
+- Restart VS Code
+- Check if extension is properly installed
+- Try reinstalling the PlatformIO extension</p>
+<h3>Issue: Serial Monitor shows garbled text</h3>
+<p><strong>Solution</strong>:
+- Check baud rate is set to 115200
+- Ensure correct port is selected
+- Try disconnecting and reconnecting the board</p>
+<h3>Issue: Python libraries won't install</h3>
+<p><strong>Solution</strong>:
+- Ensure Python is properly installed
+- Try using <code>pip3</code> instead of <code>pip</code>
+- On some systems, use <code>python -m pip install</code> instead</p>
+<h2>Next Steps</h2>
+<p>Once you've completed this setup guide successfully, you're ready to begin Assignment 1. The assignment will build upon this basic setup by adding:
+- Photoresistor circuit
+- TensorFlow Lite Micro integration
+- Real-time data visualization</p>
+<p>If you encounter any issues not covered in this guide, please:
+1. Check the course discussion forum
+2. Attend office hours
+3. Contact the teaching assistants</p>
+<p>Good luck with Assignment 1!</p>

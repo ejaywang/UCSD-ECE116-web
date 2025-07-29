@@ -1,0 +1,121 @@
+<h1>ECE 4xx: Embedded Artificial Intelligence - Assignments</h1>
+<p>This document outlines the practical assignments for the Embedded Artificial Intelligence course. These exercises are designed to reinforce theoretical concepts and provide hands-on experience in developing and deploying AI solutions on embedded systems. Students are expected to leverage their foundational knowledge in Arduino, Python, and Object-Oriented Programming.</p>
+<h2>Assignments</h2>
+<h3>Assignment 1: Fundamentals of On-Device Inference with Microcontrollers</h3>
+<p><strong>Due Date:</strong> Week 2, Friday, 7:00 PM (with an automatic 5-hour grace period)</p>
+<p><strong>Total Points:</strong> 100 points</p>
+<h2>1. Introduction</h2>
+<p>Welcome to your first hands-on assignment in Embedded AI! This assignment will guide you through setting up your development environment for the ESP32-S3 and deploying a simple pre-trained machine learning model directly onto the microcontroller. You will learn how to acquire sensor data, perform on-device inference, and visualize the results on your computer. This foundational exercise is crucial for understanding the basic workflow of TinyML applications.</p>
+<h2>2. Learning Objectives</h2>
+<p>Upon successful completion of this assignment, you will be able to:</p>
+<ul>
+<li>Set up and configure the PlatformIO development environment for the ESP32-S3.</li>
+<li>Integrate and utilize the TensorFlow Lite Micro library within an embedded project.</li>
+<li>Acquire analog sensor data from the ESP32-S3.</li>
+<li>Deploy a pre-trained machine learning model to an ESP32-S3 and perform on-device inference.</li>
+<li>Transmit sensor data and inference results from the ESP32-S3 to a host PC via serial communication.</li>
+<li>Develop a Python script to visualize real-time data received from the embedded device.</li>
+</ul>
+<h2>3. Hardware and Software Requirements</h2>
+<p>For this assignment, you will need the following:</p>
+<h3>Hardware:</h3>
+<ul>
+<li><strong>Espressif ESP32-S3-EYE Development Board:</strong> Your primary development board for the course. Ensure it is functioning correctly and you can upload basic sketches to it.</li>
+<li><strong>Photoresistor (LDR):</strong> A simple analog light sensor. (Alternatively, a thermistor for temperature sensing can be used if a photoresistor is unavailable).</li>
+<li><strong>Breadboard:</strong> For prototyping your circuit.</li>
+<li><strong>Jumper Wires:</strong> Male-to-male and male-to-female for connections.</li>
+<li><strong>Micro-USB to USB-A Cable:</strong> For programming and powering your ESP32-S3-EYE.</li>
+</ul>
+<h3>Software:</h3>
+<ul>
+<li><strong>Visual Studio Code (VS Code):</strong> Your primary IDE.</li>
+<li><strong>PlatformIO IDE Extension for VS Code:</strong> Installed and configured for ESP32 development.</li>
+<li><strong>Python 3.x:</strong> Installed on your host PC.</li>
+<li><strong>Required Python Libraries:</strong> <code>pyserial</code>, <code>matplotlib</code>, <code>numpy</code> (install via <code>pip install pyserial matplotlib numpy</code>).</li>
+<li><strong>TensorFlow Lite Micro Library:</strong> Will be integrated into your PlatformIO project (instructions below).</li>
+</ul>
+<h2>4. Assignment Tasks</h2>
+<p>Follow these steps to complete the assignment:</p>
+<h3>Task 1: Environment Setup and Basic ESP32-S3 Sketch (15 points)</h3>
+<p>a. <strong>Install VS Code and PlatformIO:</strong> If you haven't already, install Visual Studio Code and the PlatformIO IDE extension. Configure PlatformIO for ESP32-S3 development.</p>
+<p>b. <strong>Verify Board Connectivity:</strong> Create a new PlatformIO project for the ESP32-S3-EYE. Write a simple sketch (e.g., a blinking LED or a serial print "Hello World!") and upload it to your ESP32-S3-EYE to ensure your setup is correct.</p>
+<h3>Task 2: Sensor Data Acquisition (20 points)</h3>
+<p>a. <strong>Circuit Assembly:</strong> Connect the photoresistor to your ESP32-S3-EYE. Typically, this involves a voltage divider circuit: connect one end of the photoresistor to 3.3V, the other end to an analog input pin (e.g., GPIO 1 or 2, refer to your board's pinout), and a pull-down resistor (e.g., 10kΩ) from the analog input pin to GND.</p>
+<p>b. <strong>Read Analog Data:</strong> Write ESP32-S3 code (in PlatformIO) to continuously read the analog value from the connected photoresistor. Print this raw analog value to the serial monitor at a regular interval (e.g., every 100ms).</p>
+<h3>Task 3: Integrate TensorFlow Lite Micro Model (30 points)</h3>
+<p>a. <strong>Model Provision:</strong> You will be provided with a pre-trained TensorFlow Lite Micro model (<code>model.h</code> file) that takes a single analog sensor input and outputs a simple classification (e.g., <code>0</code> for 'dark', <code>1</code> for 'bright'). This model will be made available on the course website.</p>
+<p>b. <strong>Integrate Model:</strong> Add the provided <code>model.h</code> file to your PlatformIO project. Modify your ESP32-S3 code to integrate this model. This involves:
+    *   Including the necessary TensorFlow Lite Micro headers.
+    *   Instantiating the <code>tflite::MicroInterpreter</code>.
+    *   Allocating a <code>tflite::MicroMutableOpResolver</code> and a <code>tensor_arena</code>.
+    *   Loading the model from <code>model.h</code>.
+    *   Getting pointers to the input and output tensors.</p>
+<p>c. <strong>Perform Inference:</strong> In your main loop, after reading the analog sensor value, feed this value to the model's input tensor. Invoke the interpreter to perform inference. Read the result from the model's output tensor.</p>
+<p>d. <strong>Serial Output:</strong> Modify your serial output to include both the raw analog sensor value and the model's inference result (e.g., <code>Analog: XXX, Inference: Y</code>).</p>
+<h3>Task 4: Host-Side Data Visualization (25 points)</h3>
+<p>a. <strong>Python Script Development:</strong> Write a Python script on your host PC that does the following:
+    *   Connects to the ESP32-S3 via its serial port (you'll need to find the correct port name for your system).
+    *   Continuously reads the serial data from the ESP32-S3.
+    *   Parses the incoming data to extract the analog sensor value and the inference result.
+    *   Uses <code>matplotlib</code> to create a real-time plot showing both the raw analog sensor value over time and the corresponding inference result. The plot should update dynamically as new data arrives.</p>
+<h3>Task 5: Report and Video Demonstration (10 points)</h3>
+<p>a. <strong>Report:</strong> Write a brief report (2-3 pages) in Markdown format (<code>.md</code>) that includes:
+    *   A description of your hardware setup, including a simple Fritzing diagram or hand-drawn schematic of your photoresistor circuit.
+    *   An explanation of your ESP32-S3 code, focusing on how you integrated the TensorFlow Lite Micro model and performed inference.
+    *   A description of your Python visualization script.
+    *   Screenshots of your real-time plot showing different sensor inputs and corresponding inference outputs.
+    *   A discussion of your observed results, any challenges you encountered, and how you overcame them.</p>
+<p>b. <strong>Video Demonstration:</strong> Record a short video (2-3 minutes) demonstrating your working system. The video should clearly show:
+    *   Your ESP32-S3-EYE board with the connected photoresistor.
+    *   The real-time plot on your host PC updating as you change the light intensity on the photoresistor.
+    *   The serial monitor output (optional, but helpful).</p>
+<h2>5. Submission Guidelines</h2>
+<p>Submit the following files to the designated course management system (e.g., Canvas, GitHub Classroom) by the due date:</p>
+<ol>
+<li><strong>PlatformIO Project Folder:</strong> A zipped archive of your complete PlatformIO project folder (including <code>src</code>, <code>lib</code>, <code>platformio.ini</code>, etc.).</li>
+<li><strong>Python Script:</strong> Your host-side Python visualization script (<code>.py</code> file).</li>
+<li><strong>Report:</strong> Your report in Markdown format (<code>report.md</code>).</li>
+<li><strong>Video Demonstration:</strong> A link to your video demonstration (e.g., YouTube, Google Drive, or directly uploaded if allowed by the system).</li>
+</ol>
+<p><strong>Important:</strong> Ensure your code is well-commented and your report is clear and concise. Late submissions will be penalized as per the course syllabus. If you encounter any issues, please utilize the course discussion forum or office hours for assistance.</p>
+<h2>Supporting Materials for Assignment 1</h2>
+<p>To help you complete this assignment successfully, the following supporting materials are provided:</p>
+<ul>
+<li><strong><code>assignment_1_setup_guide.md</code></strong>: A detailed step-by-step guide for setting up your ESP32-S3 development environment, including troubleshooting common issues.</li>
+<li><strong><code>assignment_1_starter_code/</code></strong>: A directory containing:<ul>
+<li>PlatformIO project template with proper configuration for ESP32-S3 and TensorFlow Lite Micro</li>
+<li>Starter ESP32-S3 firmware code with TODO comments indicating where you need to add your implementation</li>
+<li>Python script template for real-time data visualization with serial communication setup</li>
+</ul>
+</li>
+<li><strong>Pre-trained TensorFlow Lite Micro Model</strong>: A simple binary classification model (<code>model.h</code>) will be provided on the course website. This model takes a single normalized analog input (0.0-1.0) and outputs a binary classification result.</li>
+</ul>
+<h3>Assignment 2: Deep Learning for Embedded Vision - Model Deployment and Basic Optimization</h3>
+<p><strong>Objective:</strong> Deploy a pre-trained convolutional neural network (CNN) for a simple image classification task on a more capable embedded device and perform initial model size reduction.</p>
+<p><strong>Description:</strong> You will set up the development environment for the <strong>ESP32-S3 with camera module</strong>. Deploy a pre-trained, quantized (e.g., 8-bit integer) image classification model (e.g., MobileNetV1/V2 for a small number of classes). Perform on-device inference for image classification, and measure and report inference speed and memory usage, comparing it to a non-optimized version if possible.</p>
+<p><strong>Deliverables:</strong>
+*   Converted and optimized model files.
+*   Code for real-time image classification on the embedded device.
+*   A short video demonstrating the real-time inference on your configured device.
+*   A report detailing the setup process, model conversion, and inference performance, including a comparison of optimized vs. non-optimized models.</p>
+<h3>Assignment 3: Embedded AI for Audio Processing - Keyword Spotting and Model Quantization</h3>
+<p><strong>Objective:</strong> Implement a keyword spotting system on an embedded device, focusing on audio data acquisition and the impact of quantization on model performance and resource usage.</p>
+<p><strong>Description:</strong> You will integrate a microphone with an <strong>ESP32-S3</strong> device, collect and preprocess audio data for keyword spotting. Deploy a pre-trained keyword spotting model (e.g., from TensorFlow Lite Micro examples). Experiment with different quantization levels (e.g., 8-bit vs. 16-bit) and analyze their effect on accuracy, model size, and inference speed. Implement a simple application that responds to a specific keyword.</p>
+<p><strong>Deliverables:</strong>
+*   Code for audio data acquisition and keyword spotting on the embedded device.
+*   A short video demonstrating the keyword spotting functionality.
+*   A report analyzing the impact of quantization on model performance and resource usage.</p>
+<h3>Assignment 4: Sensor Fusion and Anomaly Detection on the Edge</h3>
+<p><strong>Objective:</strong> Develop an embedded AI application that integrates data from multiple sensors and uses machine learning for anomaly detection, emphasizing real-time data processing and decision-making.</p>
+<p><strong>Description:</strong> You will integrate two or more sensors (e.g., IMU for motion, temperature/humidity for environmental monitoring). Collect synchronized data streams from these sensors. Train a simple anomaly detection model (e.g., an Autoencoder or One-Class SVM) using collected normal data. Deploy the trained model on the <strong>ESP32-S3</strong> for real-time anomaly detection. Implement a feedback mechanism (e.g., LED indicator, buzzer) to signal detected anomalies.</p>
+<p><strong>Deliverables:</strong>
+*   Code for sensor integration, data collection, and anomaly detection on the embedded device.
+*   A short video demonstrating the anomaly detection system.
+*   A report detailing the sensor fusion approach, model training, deployment, and anomaly detection performance.</p>
+<h3>Assignment 5: Advanced Embedded AI - Edge-Cloud Hybrid System</h3>
+<p><strong>Objective:</strong> Explore advanced concepts in embedded AI by implementing a hybrid edge-cloud system that demonstrates the trade-offs between on-device and cloud-based processing.</p>
+<p><strong>Description:</strong> You will design and implement a system where simple tasks are handled on-device (on the <strong>ESP32-S3</strong>) and complex tasks are offloaded to the cloud. This could involve, for example, on-device pre-filtering of sensor data before sending relevant data to the cloud for more intensive analysis, or on-device detection of simple events triggering cloud-based actions. You will implement decision logic for when to use edge vs. cloud processing and measure and compare latency, accuracy, and power consumption for different scenarios.</p>
+<p><strong>Deliverables:</strong>
+*   Code for both edge and cloud components of the hybrid system.
+*   A demonstration of the hybrid system in action.
+*   A comprehensive report analyzing the trade-offs between edge and cloud processing in your implemented system, including performance metrics (latency, power, accuracy) and a discussion of the decision logic.</p>

@@ -1,0 +1,64 @@
+<h1>ECE 4xx: Embedded Artificial Intelligence - Final Exam Question Pool</h1>
+<p>This document contains a pool of 10 conceptual and design-heavy questions for the final exam. These questions are designed to assess students' understanding of core embedded AI concepts and their ability to apply them in practical design scenarios.</p>
+<h3>Question 1: Smart Doorbell Design</h3>
+<p><strong>Scenario:</strong> You are tasked with designing a smart doorbell that can recognize familiar faces and notify the homeowner of their arrival. The doorbell must operate on a low-power budget and have a small form factor.</p>
+<p><strong>Task:</strong></p>
+<p>a) Propose a high-level system architecture for this smart doorbell. Specify the key hardware components (e.g., microcontroller, camera, power source) and justify your choices based on the given constraints.</p>
+<p>b) Describe the software components of your design, including the AI model you would use for face recognition. Explain why your chosen model is suitable for this application and discuss the trade-offs involved.</p>
+<p>c) Outline the steps you would take to optimize the AI model for deployment on the resource-constrained doorbell hardware. Discuss at least two optimization techniques you would employ.</p>
+<h3>Question 2: Predictive Maintenance for Industrial Motors</h3>
+<p><strong>Scenario:</strong> A manufacturing company wants to implement a predictive maintenance system for its industrial motors to detect potential failures before they occur. The system should be able to identify anomalies in motor vibrations and temperature.</p>
+<p><strong>Task:</strong></p>
+<p>a) Design an embedded AI system to monitor the health of the industrial motors. Describe the sensors you would use and how you would collect and process the data.</p>
+<p>b) Propose an AI model for anomaly detection in this scenario. Explain your choice of model and how you would train it. Discuss the challenges of collecting and labeling data for this application.</p>
+<p>c) Compare and contrast the trade-offs of deploying this anomaly detection system on individual embedded devices attached to each motor versus a centralized edge gateway that collects data from multiple motors.</p>
+<h3>Question 3: Wearable Health Monitor for Elderly Care</h3>
+<p><strong>Scenario:</strong> You are designing a wearable device for elderly individuals that can detect falls and monitor vital signs (e.g., heart rate, body temperature). The device must be comfortable to wear, have a long battery life, and be able to send alerts to caregivers in case of an emergency.</p>
+<p><strong>Task:</strong></p>
+<p>a) Propose a system design for this wearable health monitor. Specify the sensors, microcontroller, and communication module you would use. Justify your choices based on the requirements of the application.</p>
+<p>b) Describe the AI model you would use for fall detection. Explain how you would handle the real-time processing of sensor data and the challenges of achieving high accuracy while minimizing false positives.</p>
+<p>c) Discuss the privacy and security considerations for this wearable device. How would you ensure the secure transmission and storage of sensitive health data?</p>
+<h3>Question 4: TinyML vs. Edge Computing for Smart Agriculture</h3>
+<p><strong>Scenario:</strong> A large-scale farm wants to deploy an AI-powered system to monitor crop health and optimize irrigation. The system needs to analyze images of crops to detect signs of disease or pests.</p>
+<p><strong>Task:</strong></p>
+<p>a) Compare and contrast two different approaches for implementing this smart agriculture system:
+    i) A TinyML approach where small, low-power devices with cameras are deployed throughout the farm to perform on-device image analysis.
+    ii) An edge computing approach where images are streamed from simple cameras to a more powerful edge gateway for processing.</p>
+<p>b) Discuss the advantages and disadvantages of each approach in terms of cost, scalability, power consumption, latency, and model complexity.</p>
+<p>c) For the TinyML approach, what are the key challenges in deploying and maintaining a large number of intelligent devices in a harsh outdoor environment?</p>
+<h3>Question 5: Model Optimization Trade-offs</h3>
+<p><strong>Scenario:</strong> You have trained a deep neural network for an image classification task on a powerful desktop GPU. Now, you need to deploy this model on a resource-constrained microcontroller with limited memory and processing power.</p>
+<p><strong>Task:</strong></p>
+<p>a) Describe three different model optimization techniques you could use to make your model suitable for the microcontroller. For each technique, explain how it works and its impact on model size, inference speed, and accuracy.</p>
+<p>b) Create a hypothetical scenario where you would prioritize model accuracy over inference speed, and another scenario where inference speed is more critical than accuracy. Justify your reasoning for each scenario.</p>
+<p>c) Discuss the challenges of debugging and validating the performance of an optimized model on an embedded device. How would you ensure that the optimized model still meets the application's requirements?</p>
+<h3>Question 6: Federated Learning for Smart Homes</h3>
+<p><strong>Scenario:</strong> A company wants to develop a personalized smart home assistant that learns the habits and preferences of its users to provide proactive assistance. The company is committed to protecting user privacy and wants to avoid collecting raw data from users' homes.</p>
+<p><strong>Task:</strong></p>
+<p>a) Explain how federated learning could be used to train a personalized smart home assistant model without centralizing user data. Describe the roles of the central server and the individual smart home devices in the federated learning process.</p>
+<p>b) Discuss the advantages of using federated learning in this scenario compared to a traditional cloud-based approach. What are the main challenges in implementing a federated learning system for smart homes?</p>
+<p>c) How would you address the issue of statistical heterogeneity (i.e., the data on each smart home device is not identically distributed) in a federated learning system? Explain at least one technique to mitigate this issue.</p>
+<h3>Question 7: AI-Powered Noise Cancellation for Earbuds</h3>
+<p><strong>Scenario:</strong> You are part of a team developing a new pair of wireless earbuds with adaptive noise cancellation. The earbuds need to be able to distinguish between different types of ambient sounds (e.g., speech, traffic, wind) and apply the appropriate level of noise cancellation in real-time.</p>
+<p><strong>Task:</strong></p>
+<p>a) Propose a high-level design for the embedded AI system that powers the adaptive noise cancellation feature. Specify the audio processing pipeline, from microphone input to noise-cancelled output.</p>
+<p>b) Describe the AI model you would use for ambient sound classification. Explain how you would train this model and the challenges of deploying it on a power-constrained device like an earbud.</p>
+<p>c) Discuss the trade-offs between the complexity of the noise cancellation algorithm and the battery life of the earbuds. How would you approach finding the right balance?</p>
+<h3>Question 8: On-Device vs. Cloud-Based Speech Recognition</h3>
+<p><strong>Scenario:</strong> A company is developing a new voice-controlled smart speaker. They are deciding whether to implement the speech recognition functionality entirely on the device or to rely on a cloud-based service.</p>
+<p><strong>Task:</strong></p>
+<p>a) Compare and contrast the on-device and cloud-based approaches for speech recognition in this smart speaker application. Discuss the pros and cons of each approach in terms of latency, accuracy, privacy, cost, and offline functionality.</p>
+<p>b) For the on-device approach, what are the main challenges in achieving high accuracy for a large vocabulary and multiple languages on a resource-constrained device?</p>
+<p>c) Propose a hybrid approach that combines the benefits of both on-device and cloud-based speech recognition. Describe how this hybrid system would work and in what scenarios it would be most effective.</p>
+<h3>Question 9: Security of Embedded AI Systems</h3>
+<p><strong>Scenario:</strong> As embedded AI systems become more prevalent in our daily lives (e.g., in smart locks, autonomous vehicles, and medical devices), ensuring their security is of utmost importance.</p>
+<p><strong>Task:</strong></p>
+<p>a) Describe three potential security vulnerabilities of an embedded AI system. For each vulnerability, explain how an attacker could exploit it and the potential consequences.</p>
+<p>b) Propose a set of security measures to mitigate the vulnerabilities you described in part (a). Your measures should cover both hardware and software aspects of the system.</p>
+<p>c) Discuss the concept of adversarial attacks on AI models. How could an attacker craft an adversarial input to fool an embedded AI system (e.g., a smart lock with face recognition)? What are some potential defense mechanisms against such attacks?</p>
+<h3>Question 10: Designing an Efficient Neural Network Architecture</h3>
+<p><strong>Scenario:</strong> You are tasked with designing a custom convolutional neural network (CNN) architecture for an image classification task on a specific embedded device with known hardware constraints (e.g., memory size, processor speed, power budget).</p>
+<p><strong>Task:</strong></p>
+<p>a) Describe the key principles of designing efficient neural network architectures for embedded devices. Discuss at least three architectural design choices you would consider to minimize computational complexity and memory footprint.</p>
+<p>b) How would you use hardware-aware neural architecture search (NAS) to automate the process of finding an optimal CNN architecture for your target device? Explain the basic idea behind NAS and its advantages over manual design.</p>
+<p>c) Discuss the importance of co-designing the hardware and software for embedded AI systems. How can knowledge of the underlying hardware architecture inform the design of a more efficient AI model, and vice versa?</p>
